@@ -168,7 +168,7 @@
     <integer-array name="settings_key_keycodes">
     </integer-array>
     <!-- What those Settings buttons open: false, the TV's Settings; true, a small glass panel at the top right
-         with TV settings, Display, Network, Apps (re-enable an app) and Launcher settings, over whatever is on screen.
+         with TV settings, Display, Network, Bluetooth, Apps (re-enable an app) and Launcher settings, over whatever is on screen.
          true also makes a click on the header's Settings button open that panel, unless launcher_settings_button is on.
          Both keys can also be set from a theme's config.json ("settings_key_keycodes": [83]). -->
     <bool name="settings_key_panel">false</bool>

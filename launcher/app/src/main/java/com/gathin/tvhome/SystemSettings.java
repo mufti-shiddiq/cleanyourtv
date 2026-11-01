@@ -35,6 +35,21 @@ final class SystemSettings {
         }
     }
 
+    /** Bluetooth settings. The AOSP TV settings app has no BLUETOOTH_SETTINGS filter (Xiaomi MiTV-MOSR4,
+     *  Google TV 11); its Remotes & Accessories page is a slice, opened through SLICE_SETTINGS. */
+    static Intent bluetooth(Context context) {
+        PackageManager pm = context.getPackageManager();
+        ResolveInfo resolved = pm.resolveActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS),
+                PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolved != null && !resolved.activityInfo.name.contains("CTSDummy")) {
+            return new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
+        }
+        Intent accessories = new Intent("android.settings.SLICE_SETTINGS")
+                .putExtra("slice_uri", "content://com.android.tv.settings.accessories.sliceprovider/general");
+        if (pm.resolveActivity(accessories, PackageManager.MATCH_DEFAULT_ONLY) != null) return accessories;
+        return intent(context, Settings.ACTION_BLUETOOTH_SETTINGS);
+    }
+
     private static final ComponentName AOSP_TV_SETTINGS =
             new ComponentName("com.android.tv.settings", "com.android.tv.settings.MainSettings");
 

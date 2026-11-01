@@ -121,7 +121,7 @@ tools/tv.py 'settings put secure screensaver_components com.gathin.tvhome/.Clock
 - `HOME_KEY_SERVICE=1` also fixes sticks whose Home key sends ALL_APPS, and opens Settings from the remote's
   **gear** button, even one Android does not map (scancodes or keycodes in config.xml).
 - With `settings_key_panel` the gear opens a [small quick settings panel](quick-settings-panel.jpg)
-  over Home or any app: TV settings, Display, Network, Apps and Launcher settings.
+  over Home or any app: TV settings, Display, Network, Bluetooth, Apps and Launcher settings.
 
 The full `app_keys` format is in the [`themes/README.md` keys table](../themes/README.md#keys).
 

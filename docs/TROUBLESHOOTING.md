@@ -1116,7 +1116,7 @@ turned off in Settings stays off.
   box `com.gretzky.GlobalKey` still has those, and the gear used to be answered by launcherx. Reinstall
   with `HOME_KEY_SERVICE=1`, set `settings_key_panel` (config.xml or a theme) and put `83` in
   `settings_key_keycodes`. `83` is `KEYCODE_NOTIFICATION`, the code the stock Google TV home turned into
-  its quick settings panel. The gear then opens the launcher's panel (TV settings, Display, Network, Apps,
+  its quick settings panel. The gear then opens the launcher's panel (TV settings, Display, Network, Bluetooth, Apps,
   Launcher settings) from Home or another app, and the helper was still bound after a reboot on both sets.
   Press the real button; a key injected over ADB does not reach the helper. Holding volume may step only
   once while the helper is bound, which is the usual trade on these two boards.
