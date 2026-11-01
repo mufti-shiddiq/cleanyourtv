@@ -21,5 +21,6 @@
   "glow_style": "horizon",
   "focus_overshoot": false,
   "advanced_effects": true,
-  "app_library": true
+  "app_library": true,
+  "settings_key_panel": true
 }
