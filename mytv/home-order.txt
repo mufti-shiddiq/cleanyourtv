@@ -1,0 +1,36 @@
+# Home order on the TV, read from the screen on 2026-11-02 (5 apps per row).
+# The launcher keeps this order in its private order.txt, which ADB cannot read, and no config key
+# carries the grid order. The order was saved under dock_apps YouTube, Netflix, Vidio, Spotify, so
+# config.json keeps that list: change it and the launcher drops the saved order (the dock follows
+# dock_apps, the grid goes back to alphabetical). With fill_dock on, the dock shown is the first
+# five tiles of the saved order. Use this file to put the grid back with Settings (hold OK) > Reorder apps.
+
+[dock]
+com.netflix.ninja                          Netflix
+com.spotify.tv.android                     Spotify
+io.gh.reisxd.tizentube.cobalt              TizenTube
+com.smartdevice.tv.aircast                 AirCast
+com.xiaomi.mitv.smartshare                 Miracast
+
+[grid]
+com.mitv.livetv                            Live TV
+com.vidio.android.tv                       Vidio
+com.apple.atve.androidtv.appletv           Apple TV
+app.netmirror.newtv                        NetMirrorTV
+com.amazon.amazonvideo.livingroom          Prime Video
+com.tencent.qqlivei18n                     WeTV
+com.tcl.browser                            BrowseHere
+com.internet.tvbrowser                     BROWSER
+clock.timer.stopwatch.app                  Clock Timer Stopwatch
+com.google.android.apps.tachyon            Meet
+org.localsend.localsend_app                LocalSend
+com.google.android.youtube.tv              YouTube
+com.google.android.youtube.tvmusic         YouTube Music
+com.cxinventor.file.explorer               Cx File Explorer
+pl.dronline.nettools                       DR-NetTools
+com.analiti.fastest.android                analiti
+com.finalwire.aida64                       AIDA64
+com.android.vending                        Play Store
+com.xiaomi.mitv.mediaexplorer              Media Player
+com.android.tv.settings                    Settings
+com.shenyaocn.android.usbcamerapro         USB Camera Pro    (not a TV app: added from the App library)
