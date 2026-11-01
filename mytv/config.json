@@ -22,5 +22,7 @@
   "focus_overshoot": false,
   "advanced_effects": true,
   "app_library": true,
-  "settings_key_panel": true
+  "settings_key_panel": true,
+  "show_stats": true,
+  "stats_below_library": true
 }
