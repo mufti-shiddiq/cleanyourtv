@@ -13,7 +13,7 @@
     "194:com.amazon.amazonvideo.livingroom"
   ],
   "background_color": "#090C14",
-  "wallpaper": true,
+  "wallpaper": false,
   "cinematic_home": true,
   "dock_glass": true,
   "icon_only_buttons": true,
@@ -24,5 +24,6 @@
   "app_library": true,
   "settings_key_panel": true,
   "show_stats": true,
-  "stats_below_library": true
+  "stats_below_library": true,
+  "dither": 6
 }
