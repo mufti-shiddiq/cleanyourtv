@@ -1,0 +1,2 @@
+# Run only after com.gathin.tvhome is installed and launcherx is still enabled (docs/devices/xiaomi-mitv-mosr4.md).
+com.google.android.tungsten.setupwraith
