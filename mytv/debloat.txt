@@ -64,10 +64,10 @@ android.autoinstalls.config.xiaomi.amelie   # silent preload installer config
 com.xiaomi.mitv.manualhelp             # on-screen manual (second unit only)
 com.android.printspooler               # print spooler (second unit)
 
-# Mi Cast / Miracast - Chromecast built-in (mediashell) still works without them
+# Mi Cast / Miracast receiver (Windows Win+K, Android Screen Cast) - kept enabled on this TV
 # com.mitv.milinkservice              # not on this model
-com.xiaomi.mitv.smartshare
-com.xiaomi.wfdsinkhelperservice
+# com.xiaomi.mitv.smartshare
+# com.xiaomi.wfdsinkhelperservice
 
 # Preloaded apps, off by choice - re-enable any you use
 com.xiaomi.mimusic2                    # Mi Music
