@@ -456,6 +456,11 @@
          the clock. Without the pill (app_library off) the line stays under the clock. -->
     <bool name="stats_below_library">false</bool>
 
+    <!-- Faint tiled noise over the backdrop, wallpaper and ambient glow: the alpha of its lightest grain, 0 (off)
+         to 16. Some TV panels show fewer shades than the launcher draws, so a dark gradient turns into bands;
+         the noise breaks those into grain too fine to see from the sofa. Around 4 to 8. "dither" in a theme. -->
+    <integer name="dither">0</integer>
+
     <!-- Each team's next game in the F1 panel's place under the clock, rotating with the theme's F1 weekend: the package
          of an add-on that publishes them (the Game Day add-on: io.github.justinnewman.gameday; contract in docs/modules.md).
          Empty = off: nothing is read or watched. The launcher only reads what the add-on publishes and never goes

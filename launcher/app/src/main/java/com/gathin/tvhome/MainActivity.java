@@ -509,6 +509,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         glass.setStyle(cfg.glassStyle);
         if (festive) glass.setAccent(festival.accentColor());
         ambient = findViewById(R.id.ambient);
+        if (cfg.dither > 0) {
+            View dither = findViewById(R.id.dither);
+            dither.setBackground(ditherNoise(getResources(), cfg.dither));
+            dither.setVisibility(View.VISIBLE);
+        }
         // The glow is one bitmap, so its alpha can be applied while drawing it. Otherwise every frame of
         // a fade renders it into a full-screen offscreen buffer first.
         ambient.forceHasOverlappingRendering(false);
@@ -2240,6 +2245,21 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private HandlerThread statsThread;
     /** The current run's handler; a run whose handler is no longer this one stops (volatile: read off-thread). */
     private volatile Handler statsBg;
+
+    /** dither: a 64 px tile of grain, a light or dark speck per pixel, repeated over the screen. Dark specks get
+     *  twice the alpha so the grain does not lift black on average. */
+    private static BitmapDrawable ditherNoise(Resources res, int alpha) {
+        int size = 64;
+        int[] px = new int[size * size];
+        java.util.Random random = new java.util.Random(1);
+        for (int i = 0; i < px.length; i++) {
+            boolean light = random.nextBoolean();
+            px[i] = (random.nextInt((light ? alpha : 2 * alpha) + 1) << 24) | (light ? 0xFFFFFF : 0);
+        }
+        BitmapDrawable tile = new BitmapDrawable(res, Bitmap.createBitmap(px, size, size, Bitmap.Config.ARGB_8888));
+        tile.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        return tile;
+    }
 
     private void startStats() {
         if (statsThread != null) return;
