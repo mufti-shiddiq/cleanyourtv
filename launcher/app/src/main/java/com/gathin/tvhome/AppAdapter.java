@@ -203,6 +203,9 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final boolean animations;
     private final boolean advancedEffects;
     private final boolean showLibrary;
+    /** stats_below_library: the latest stats line and the library row's view for it (one library row at most). */
+    private String statsLine;
+    private TextView libraryStats;
     /** Packages with a leanback entry at the last reload(): their tiles launch with the leanback category. */
     private Set<String> leanbackPackages = new HashSet<>();
     private final boolean showHomeSettings;
@@ -402,7 +405,15 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             View row = LayoutInflater.from(ctx).inflate(R.layout.row_app_library, parent, false);
             View button = row.findViewById(R.id.btnLibrary);
             button.setOnClickListener(v -> listener.onLibraryRequested());
-            button.setOnFocusChangeListener((v, focused) -> { if (focused) listener.onLibraryFocused(); });
+            libraryStats = row.findViewById(R.id.libraryStats);
+            showStatsLine();
+            button.setOnFocusChangeListener((v, focused) -> {
+                if (!focused) return;
+                listener.onLibraryFocused();
+                // Scroll far enough to show the stats line under the pill too, not only the pill.
+                if (statsLine != null) row.post(() -> row.requestRectangleOnScreen(
+                        new Rect(0, 0, row.getWidth(), row.getHeight()), false));
+            });
             button.setOnKeyListener((v, key, event) -> {
                 if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
                 if (key == KeyEvent.KEYCODE_DPAD_UP) listener.onLibraryUp();
@@ -568,6 +579,18 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     int appCount() { return items.size(); }
+
+    /** The stats line under the library pill; null hides it. Set directly, not by rebinding, so focus stays put. */
+    void setStatsLine(String line) {
+        statsLine = line;
+        showStatsLine();
+    }
+
+    private void showStatsLine() {
+        if (libraryStats == null) return;
+        libraryStats.setText(statsLine);
+        libraryStats.setVisibility(statsLine == null ? View.GONE : View.VISIBLE);
+    }
 
     boolean isLibraryAt(int position) { return showLibrary && position == items.size(); }
 

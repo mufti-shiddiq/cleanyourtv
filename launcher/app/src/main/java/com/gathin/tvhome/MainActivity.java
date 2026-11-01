@@ -208,6 +208,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private final Runnable turnTick = this::updatePanel;
     /** config.xml show_stats, overridable by a theme. Off: the line is gone and nothing is read. */
     private boolean showStats;
+    /** stats_below_library, only while the App library pill is there to carry the line. */
+    private boolean statsBelowLibrary;
     /** config.xml inputs_connected_only: the Inputs menu lists only connected inputs, the rest behind "More inputs". */
     private boolean inputsConnectedOnly;
     private boolean shamsi;
@@ -575,6 +577,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // The rotation runs on the clock that never jumps: setting the TV's time must not stall or stretch a turn.
         rotationStart = SystemClock.elapsedRealtime();
         showStats = cfg.showStats;
+        statsBelowLibrary = cfg.statsBelowLibrary
+                && LibraryApps.showPill(cfg.appLibrary, cfg.libraryButton, cfg.showLibraryPill);
         inputsConnectedOnly = cfg.inputsConnectedOnly;
         shamsi = cfg.shamsiDate;
         lunarDate = findViewById(R.id.lunarDate);
@@ -2239,7 +2243,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     private void startStats() {
         if (statsThread != null) return;
-        stats.setVisibility(View.VISIBLE);
+        stats.setVisibility(statsBelowLibrary ? View.GONE : View.VISIBLE);
         cpuTotalPrev = -1;
         idlePrev = -1;
         procStatDead = false;
@@ -2255,7 +2259,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 if (statsBg != bg) return;
                 String line = readStatsLine();
                 handler.post(() -> {
-                    if (showStats && stats != null && statsBg == bg) stats.setText(line);
+                    if (!showStats || stats == null || statsBg != bg) return;
+                    if (statsBelowLibrary) adapter.setStatsLine(line);
+                    else stats.setText(line);
                 });
                 if (statsBg == bg) bg.postDelayed(this, STATS_MS);
             }
